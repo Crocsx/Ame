@@ -5,14 +5,9 @@ using UnityEngine;
 public class Thunder : MonoBehaviour {
 
     public Material[] thunderMaterial;
-    ParticleSystemRenderer pSystem;
-	// Use this for initialization
-	void Start () {
-        pSystem = GetComponent<ParticleSystemRenderer>();
-    }
-	
-	// Update is called once per frame
-	void PlayThunder () {
-        pSystem.material = thunderMaterial[Random.Range(0, thunderMaterial.Length - 1)];
+
+	public void Play () {
+        GetComponent<ParticleSystemRenderer>().material = thunderMaterial[Random.Range(0, thunderMaterial.Length - 1)];
+        transform.GetComponent<ParticleSystem>().Play();
     }
 }
