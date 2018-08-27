@@ -45,3 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Arm
+    uniqueID: 2558918315
+    locked: 0
+  - name: Player
+    uniqueID: 3345706383
+    locked: 0

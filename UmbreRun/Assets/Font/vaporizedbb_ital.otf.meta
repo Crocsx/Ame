@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: a2a1e302896c1e84fb0a6d14a48e1654
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Vaporized BB
+  fontNames:
+  - Vaporized BB
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 2e572f5cb2d2e734d999ebef6d2f94ad, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
