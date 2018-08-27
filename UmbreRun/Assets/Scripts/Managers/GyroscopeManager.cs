@@ -9,8 +9,6 @@ public class GyroscopeManager : MonoBehaviour
         {
             if (m_instance)
                 return m_instance;
-
-            Debug.LogError("GyroscopeManager.Instance.get - instance is null!");
             return null;
         }
     }
@@ -36,7 +34,7 @@ public class GyroscopeManager : MonoBehaviour
     protected void Start()
     {
         Input.gyro.enabled = true;
-	}
+    }
 
     protected void Update()
     {
@@ -53,6 +51,11 @@ public class GyroscopeManager : MonoBehaviour
 
         if (OnGyroUpdateZAngle != null)
             OnGyroUpdateZAngle(Input.gyro.attitude.eulerAngles.z);
+    }
+
+    private void OnDestroy()
+    {
+        m_instance = null;
     }
 
     protected void OnGUI()
