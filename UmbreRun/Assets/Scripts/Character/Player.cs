@@ -88,4 +88,9 @@ public class Player : ADamageable
     {
         UpdateRotate();
     }
+
+    private void Start()
+    {
+        GameManager.Instance.RegisterPlayer(this);
+    }
 }
