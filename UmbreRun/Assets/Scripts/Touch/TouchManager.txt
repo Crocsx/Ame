@@ -1,0 +1,66 @@
+﻿TouchManager sert à gerer et simuler les inputs touchs sur pc.
+Pour acceder au TouchManager => TouchManager.instance
+
+TouchStruct
+public class TouchStruct
+{
+    public Touch info;
+        Touch (see unity documentation)
+    public bool isDown;
+        Is this touch down
+    public bool isPending;
+        Is this touch pending (waiting for potential doubleclick)
+    public float cooler;
+        Cooldown time for next doubleclick 
+    public Vector3 previousPosition;
+        Last Touch Position
+    public Vector3 startPosition
+        First Touch Position
+}
+
+Params =>                                       <=
+    public static int MAX_FINGER_COUNT = 5;
+	Max finger that can be tracked
+    public static int SWIPE_DISTANCE_DETECTION = 150;
+	Minimum distance for a swipe to be detected
+    public static float DOUBLE_TOUCH_COOLER = 0.5f;
+	Minimum time for a double touch to be executed
+
+Events =>                                       <=
+
+public delegate void onStartTouch(TouchStruct touch);
+    TouchManager.instance.OnStartTouch += 
+    Event Broadcasted when a touch is Started (or mouse click)
+
+public delegate void onStayTouch(TouchStruct touch);
+    TouchManager.instance.OnStayTouch += 
+    Event Broadcasted when user is staying Pressed but Stationary (or mouse pressed and stationary)
+
+public delegate void onMoveTouch(TouchStruct touch);
+    TouchManager.instance.OnMoveTouch += 
+    Event Broadcasted when user is Moving while Pressing (or mouse pressed and moved)
+
+public delegate void onDownTouch(TouchStruct touch);
+    TouchManager.instance.OnDownTouch += 
+    Event Broadcasted when user is Pressing (or mouse pressed)
+
+public delegate void onEndTouch(TouchStruct touch);
+    TouchManager.instance.OnEndTouch += 
+    Event Broadcasted when a touch is ended (or mouse released)
+
+public delegate void onDoubleTouch(TouchStruct touch);
+    TouchManager.instance.OnDoubleTouch += 
+    Event Broadcasted when user had doubletapped (or mouse doubleclick)
+
+public delegate void onDragTouch(TouchStruct touch);
+    TouchManager.instance.OnDragTouch += 
+    Event Broadcasted when the game is Ended
+
+public delegate void onSwipe(TouchStruct touch, Vector2 direction);
+    TouchManager.instance.onSwipe += 
+    Event Broadcasted when a swipe is executed (or mouse click)
+
+Methods =>                                       <=
+
+isTouching(); return bool
+    Is User Touching the screen at the moment
