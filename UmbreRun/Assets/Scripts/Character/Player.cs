@@ -9,13 +9,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     float m_rotationSpeed = 2.0f;
 
-    float m_targetRot = 0.0f; // radiant rotation
-    public float TargetRotation
+    Quaternion m_targetRot;
+    public Quaternion TargetRotation
     {
-        get { return m_targetRot * Mathf.Rad2Deg; }
+        get { return m_targetRot; }
         set
         {
-            m_targetRot = Mathf.Deg2Rad * value;
+            m_targetRot = value;
             m_currTimeRot = 0.0f;
         }
     } // Set TargetRotation as degrees
@@ -78,11 +78,9 @@ public class Player : MonoBehaviour
 
     void UpdateRotate()
 	{
-        float angle = m_targetRot / 2.0f;
         m_currTimeRot += Time.deltaTime * m_rotationSpeed;
 
-        Umbrella.transform.rotation = Quaternion.Slerp(Umbrella.transform.rotation,
-            new Quaternion(0.0f, 0.0f, Mathf.Sin(angle), Mathf.Cos(angle)), m_currTimeRot);
+        Umbrella.transform.rotation = Quaternion.Slerp(Umbrella.transform.rotation,　m_targetRot, m_currTimeRot);
 	}
 
     private void Update()
