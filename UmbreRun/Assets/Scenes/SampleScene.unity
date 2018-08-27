@@ -549,8 +549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa9ff1fe685fd84c9f7427a1b833f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Arm: {fileID: 0}
-  m_rotationSpeed: 2
+  Arm: {fileID: 1529511952}
+  m_armRange: {x: -0.5, y: 0.4}
   m_jumpCurve:
     serializedVersion: 2
     m_Curve:
