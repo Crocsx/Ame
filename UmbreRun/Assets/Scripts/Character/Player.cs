@@ -29,8 +29,6 @@ public class Player : MonoBehaviour
     float m_crouchTime = 1.0f;
     bool m_isCrouching = false;
 
-    float temp = 3.0f;
-
     bool IsJumping()
     {
         return !Mathf.Approximately(transform.position.y, 0.0f);
