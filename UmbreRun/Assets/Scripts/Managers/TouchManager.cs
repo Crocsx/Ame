@@ -1,7 +1,20 @@
 ﻿using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class TouchManager : MonoBehaviour
 {
+    private static TouchManager m_instance = null;
+    public static TouchManager Instance
+    {
+        get
+        {
+            if (m_instance)
+                return m_instance;
+
+            Debug.LogError("TouchManager.Instance.get - instance is null!");
+            return null;
+        }
+    }
+
     [SerializeField]
     private float m_minDistanceToTriggerMove = 30.0f;
 
@@ -12,6 +25,17 @@ public class InputManager : MonoBehaviour
     private bool m_isHandling = false;
     private bool m_hasTriggerHandle = false;
     private Touch m_currentTouchStart;
+
+    protected void Awake()
+    {
+        if (m_instance == null)
+            m_instance = this;
+        else if (m_instance != this)
+        {
+            Debug.LogWarning("TouchManager.Awake() - instance already exists!");
+            Destroy(gameObject);
+        }
+    }
 
     protected void Start()
     {

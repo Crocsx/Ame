@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 1738603420}
   - component: {fileID: 1738603421}
   - component: {fileID: 1738603422}
-  m_Layer: 1
+  m_Layer: 2
   m_Name: InputManager
   m_TagString: GameController
   m_Icon: {fileID: 0}

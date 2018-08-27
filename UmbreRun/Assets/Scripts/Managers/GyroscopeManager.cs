@@ -2,6 +2,19 @@
 
 public class GyroscopeManager : MonoBehaviour
 {
+    private static GyroscopeManager m_instance = null;
+    public static GyroscopeManager Instance
+    {
+        get
+        {
+            if (m_instance)
+                return m_instance;
+
+            Debug.LogError("GyroscopeManager.Instance.get - instance is null!");
+            return null;
+        }
+    }
+
     // TODO remove unused and less optimized
     public delegate void UpdateGyroDataQuat(Quaternion gyroAttitude);
     public event UpdateGyroDataQuat OnGyroUpdate;
@@ -9,12 +22,23 @@ public class GyroscopeManager : MonoBehaviour
     public delegate void UpdateGyroDataAngle(float angleDegree);
     public event UpdateGyroDataAngle OnGyroUpdateZAngle;
 
-    void Start()
+    protected void Awake()
+    {
+        if (m_instance == null)
+            m_instance = this;
+        else if (m_instance != this)
+        {
+            Debug.LogWarning("GyroscopeManager.Awake() - instance already exists!");
+            Destroy(gameObject);
+        }
+    }
+
+    protected void Start()
     {
         Input.gyro.enabled = true;
 	}
-	
-	void Update()
+
+    protected void Update()
     {
         bool isLandScapeLeft = Screen.orientation == ScreenOrientation.LandscapeLeft;
 
