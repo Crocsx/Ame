@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb90978bb048a749a3cd0a6341bcebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_minDistanceBetweenObstacles: 2
-  m_maxDistanceBetweenObstacles: 5
+  m_minDistanceBetweenObstacles: 10
+  m_maxDistanceBetweenObstacles: 20
   m_listObstacles:
   - {fileID: 114417047584149066, guid: 20be0af6cee0734488aadbb6c0a5b691, type: 2}
   - {fileID: 114087373613214248, guid: fca9d5d9deb6be14fb73469cd177bb84, type: 2}

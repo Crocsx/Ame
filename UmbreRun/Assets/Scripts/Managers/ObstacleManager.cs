@@ -16,13 +16,14 @@ public class ObstacleManager : MonoBehaviour
     }
 
     [SerializeField]
-    private float m_minDistanceBetweenObstacles = 2.0f;
+    private float m_minDistanceBetweenObstacles = 10.0f;
     [SerializeField]
-    private float m_maxDistanceBetweenObstacles = 5.0f;
+    private float m_maxDistanceBetweenObstacles = 20.0f;
     [SerializeField]
     private List<AObstacle> m_listObstacles = null;
 
     private float m_timeBeforeNextObstacle = 0.0f;
+    private float m_gameSpeed = 0.0f;
 
     private void Awake()
     {
@@ -39,11 +40,14 @@ public class ObstacleManager : MonoBehaviour
     {
         if (m_listObstacles.Count <= 0)
             Debug.LogError("ObstacleManager.Start() - no obstacles set in list");
+
+        m_gameSpeed = GameManager.Instance.ElementsSpeed;
+        GameManager.Instance.OnSpeedModified += HandleSpeedModified;
     }
 
     private void Update()
     {
-        m_timeBeforeNextObstacle -= Time.deltaTime;
+        m_timeBeforeNextObstacle -= Time.deltaTime * m_gameSpeed;
         if (m_timeBeforeNextObstacle <= 0.0f)
         {
             SendObstacle();
@@ -51,8 +55,19 @@ public class ObstacleManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        if (GameManager.Instance)
+            GameManager.Instance.OnSpeedModified -= HandleSpeedModified;
+    }
+
     private void SendObstacle()
     {
         Instantiate( m_listObstacles[Random.Range(0, m_listObstacles.Count)] );
+    }
+
+    private void HandleSpeedModified(float newSpeed)
+    {
+        m_gameSpeed = newSpeed;
     }
 }

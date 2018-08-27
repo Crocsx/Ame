@@ -32,6 +32,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private float m_timeBetweenSpeedIncrease = 1.0f;
+    [SerializeField]
+    private float m_increaseStepValue = 0.1f;
+
+    private float m_timeBeforeNextSpeedIncrease = 0.0f;
+
     private void Awake()
     {
         if (m_instance == null)
@@ -43,11 +50,13 @@ public class GameManager : MonoBehaviour
         }
 
         ElementsSpeed = 5.0f;
+        m_timeBeforeNextSpeedIncrease = m_timeBetweenSpeedIncrease;
     }
 
     private void Start()
     {
-
+        // TODO: change
+        OnUpdate = UpdateRunning;
 	}
 	
 	private void Update()
@@ -58,5 +67,16 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         m_instance = null;
+    }
+    
+    private void UpdateRunning()
+    {
+        m_timeBeforeNextSpeedIncrease -= Time.fixedDeltaTime;
+
+        if (m_timeBeforeNextSpeedIncrease <= 0)
+        {
+            ElementsSpeed += m_increaseStepValue;
+            m_timeBeforeNextSpeedIncrease = m_timeBetweenSpeedIncrease;
+        }
     }
 }
