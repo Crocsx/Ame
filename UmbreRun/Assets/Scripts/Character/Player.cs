@@ -74,4 +74,9 @@ public class Player : ADamageable
         if (Arm.transform.rotation.z < m_armRange.x || Arm.transform.rotation.z > m_armRange.y)
             Arm.transform.rotation = temp;
     }
+
+    private void Start()
+    {
+        GameManager.Instance.RegisterPlayer(this);
+    }
 }

@@ -56,8 +56,8 @@ GameObject:
   - component: {fileID: 212165890280426440}
   - component: {fileID: 114516107336650870}
   - component: {fileID: 114093793143160118}
-  - component: {fileID: 61851942434484050}
   - component: {fileID: 50556938446094074}
+  - component: {fileID: 58480383243135160}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -198,6 +198,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &58480383243135160
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1396288659943878}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.9}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!61 &61518930565975490
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -222,31 +237,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
-  m_EdgeRadius: 0
---- !u!61 &61851942434484050
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1396288659943878}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.03, y: 0.8}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.74, y: 2.79}
-    newSize: {x: 6.1, y: 6.4}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6, y: 1.2}
   m_EdgeRadius: 0
 --- !u!68 &68065225384155600
 EdgeCollider2D:
@@ -293,9 +283,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa9ff1fe685fd84c9f7427a1b833f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_collider: {fileID: 58480383243135160}
   UmbrellaArm: {fileID: 114640386387634158}
   Arm: {fileID: 1386727901492346}
-  Collider: {fileID: 61851942434484050}
   m_rotationSpeed: 2
   m_jumpCurve:
     serializedVersion: 2

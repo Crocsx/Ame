@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private bool m_isGuilleminot = false;
 
+    private Player m_player = null;
+
     private void Awake()
     {
         if (m_instance == null)
@@ -72,6 +74,16 @@ public class GameManager : MonoBehaviour
         m_instance = null;
     }
 
+    public void RegisterPlayer(Player player)
+    {
+        if (m_player)
+        {
+            Debug.LogWarning("GameManager.RegisterPlayer() - m_player was already set, replacing with new player");
+        }
+
+        m_player = player;
+    }
+
     public void NotifyLose()
     {
         if (m_isGuilleminot)
@@ -90,6 +102,8 @@ public class GameManager : MonoBehaviour
             ElementsSpeed += m_increaseStepValue;
             m_timeBeforeNextSpeedIncrease = m_timeBetweenSpeedIncrease;
         }
+
+        CheckForLoss();
     }
 
     private void UpdateGameOver()
@@ -98,4 +112,28 @@ public class GameManager : MonoBehaviour
         // TODO: score, restart etc.
     }
     #endregion
+
+    private void CheckForLoss()
+    {
+        Vector2 windDirection = EnvironmentManager.Instance.GetRainDirection().normalized;
+        CircleCollider2D playerCollider = m_player.Collider as CircleCollider2D;
+        if (playerCollider == null)
+        {
+            Debug.LogError("GameManager.CheckForLoss() - wrong type for player collider, should be CircleCollider2D");
+        }
+        Vector2 colliderPos = playerCollider.transform.position;
+        Vector2 orthoVector = new Vector2(-windDirection.y, windDirection.x);
+
+        Vector2 tangentPoint = colliderPos + playerCollider.offset + orthoVector * playerCollider.radius;
+        Debug.DrawRay(tangentPoint, -windDirection, Color.green, 2.0f);
+        RaycastHit2D hit = Physics2D.Raycast(tangentPoint, -windDirection, 1000f, ~LayerMask.NameToLayer("Umbrella"));
+        if (hit.collider == null)
+            NotifyLose();
+
+        tangentPoint = colliderPos + playerCollider.offset - orthoVector * playerCollider.radius;
+        Debug.DrawRay(tangentPoint, -windDirection, Color.red, 2.0f);
+        hit = Physics2D.Raycast(tangentPoint, -windDirection, 1000f, ~LayerMask.NameToLayer("Umbrella"));
+        if (hit.collider == null)
+            NotifyLose();
+    }
 }
