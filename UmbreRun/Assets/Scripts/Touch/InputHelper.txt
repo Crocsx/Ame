@@ -1,1 +1,0 @@
-Doit Accompagner TouchManager pour gerer le touch dans l'editeur d'unity (c'est que pour du debug)
