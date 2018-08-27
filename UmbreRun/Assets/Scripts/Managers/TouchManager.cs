@@ -9,8 +9,6 @@ public class TouchManager : MonoBehaviour
         {
             if (m_instance)
                 return m_instance;
-
-            Debug.LogError("TouchManager.Instance.get - instance is null!");
             return null;
         }
     }
@@ -77,6 +75,11 @@ public class TouchManager : MonoBehaviour
                 break;
         }
 	}
+
+    private void OnDestroy()
+    {
+        m_instance = null;
+    }
 
     private bool HandleMove(Touch activeTouch)
     {

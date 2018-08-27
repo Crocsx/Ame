@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : ADamageable
 {
+    [SerializeField]
+    Umbrella UmbrellaArm;
+
     [SerializeField]
     GameObject Arm;
 
@@ -28,8 +31,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     float m_crouchTime = 1.0f;
     bool m_isCrouching = false;
-
-    float temp = 3.0f;
 
     bool IsJumping()
     {
