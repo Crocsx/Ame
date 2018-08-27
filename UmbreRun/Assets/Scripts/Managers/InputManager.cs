@@ -3,13 +3,14 @@
 public class InputManager : MonoBehaviour
 {
     [SerializeField]
-    private float m_minDistanceToTriggerMove = 50.0f;
+    private float m_minDistanceToTriggerMove = 30.0f;
 
     public delegate void TriggerMove();
     public event TriggerMove OnMoveUp;
     public event TriggerMove OnMoveDown;
 
-    private bool m_needHandling = false;
+    private bool m_isHandling = false;
+    private bool m_hasTriggerHandle = false;
     private Touch m_currentTouchStart;
 
     protected void Start()
@@ -21,8 +22,6 @@ public class InputManager : MonoBehaviour
     {
         if (Input.touchCount <= 0)
             return;
-        
-        Debug.Log("UPDATE ENTERED");
 
         Touch activeTouch = Input.touches[0];
 
@@ -30,21 +29,23 @@ public class InputManager : MonoBehaviour
         {
             case TouchPhase.Began:
                 {
+                    if (m_isHandling)
+                        break;
                     m_currentTouchStart = activeTouch;
-                    m_needHandling = true;
+                    m_isHandling = true;
+                    m_hasTriggerHandle = false;
                     break;
                 }
             case TouchPhase.Moved:
                 {
-                    if (HandleMove(activeTouch) == true)
-                        m_needHandling = false;
+                    HandleMove(activeTouch);
                     break;
                 }
             case TouchPhase.Ended:
             case TouchPhase.Canceled:
                 {
                     HandleMove(activeTouch);
-                    m_needHandling = false;
+                    m_isHandling = false;
                     break;
                 }
             case TouchPhase.Stationary:
@@ -55,7 +56,10 @@ public class InputManager : MonoBehaviour
 
     private bool HandleMove(Touch activeTouch)
     {
-        bool directionUp = m_currentTouchStart.position.y > activeTouch.position.y;
+        if (m_hasTriggerHandle)
+            return true;
+
+        bool directionUp = m_currentTouchStart.position.y < activeTouch.position.y;
         float distanceFromStartToCurrentX = Mathf.Abs(activeTouch.position.y - m_currentTouchStart.position.y);
 
         if (distanceFromStartToCurrentX < m_minDistanceToTriggerMove)
@@ -74,6 +78,7 @@ public class InputManager : MonoBehaviour
                 OnMoveDown();
         }
 
+        m_hasTriggerHandle = true;
         return true;
     }
 }
