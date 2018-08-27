@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         TouchManager.Instance.OnMoveDown += AskCrouch;
         TouchManager.Instance.OnMoveUp += AskJump;
 
-        GyroscopeManager.Instance.OnGyroUpdate += AskRotationUpdate;
+        GyroscopeManager.Instance.OnGyroUpdateZAngle += AskRotationUpdate;
     }
 
     protected void OnDestroy()
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
         if (GyroscopeManager.Instance)
         {
-        GyroscopeManager.Instance.OnGyroUpdate -= AskRotationUpdate;
+        GyroscopeManager.Instance.OnGyroUpdateZAngle -= AskRotationUpdate;
         }
     }
     #endregion
@@ -48,8 +48,8 @@ public class PlayerController : MonoBehaviour
         m_player.Jump();
     }
 
-    private void AskRotationUpdate(Quaternion rot)
+    private void AskRotationUpdate(float rotationZ)
     {
-        m_player.TargetRotation = rot;
+        m_player.UpdateRotate(rotationZ);
     }
 }

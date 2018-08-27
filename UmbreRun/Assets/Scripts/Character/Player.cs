@@ -10,20 +10,7 @@ public class Player : ADamageable
     GameObject Arm;
 
     [SerializeField]
-    float m_rotationSpeed = 2.0f;
-
-    Quaternion m_targetRot;
-    public Quaternion TargetRotation
-    {
-        get { return m_targetRot; }
-        set
-        {
-            m_targetRot = value;
-            m_currTimeRot = 0.0f;
-        }
-    } // Set TargetRotation as degrees
-
-    float m_currTimeRot = 0.0f;
+    Vector2 m_armRange = new Vector2(-0.5f, 0.4f);
 
     [SerializeField]
     AnimationCurve m_jumpCurve;
@@ -47,7 +34,7 @@ public class Player : ADamageable
     {
         float currTime = 0.0f;
         float endTime = m_jumpCurve.keys[m_jumpCurve.length - 1].time;
-
+        
         while ((currTime += Time.deltaTime) < endTime)
         {
             transform.position = new Vector3(transform.position.x, m_jumpCurve.Evaluate(currTime), transform.position.z);
@@ -77,15 +64,14 @@ public class Player : ADamageable
         m_isCrouching = false;
     }
 
-    void UpdateRotate()
+    public void UpdateRotate(float rotationZ)
 	{
-        m_currTimeRot += Time.deltaTime * m_rotationSpeed;
+        Quaternion temp = Arm.transform.rotation;
 
-        Arm.transform.rotation = Quaternion.Slerp(Arm.transform.rotation,　m_targetRot, m_currTimeRot);
-	}
+        Arm.transform.Rotate(0.0f, 0.0f, rotationZ);
 
-    private void Update()
-    {
-        UpdateRotate();
+        // fast and ugly clamp
+        if (Arm.transform.rotation.z < m_armRange.x || Arm.transform.rotation.z > m_armRange.y)
+            Arm.transform.rotation = temp;
     }
 }

@@ -13,10 +13,6 @@ public class GyroscopeManager : MonoBehaviour
         }
     }
 
-    // TODO remove unused and less optimized
-    public delegate void UpdateGyroDataQuat(Quaternion gyroAttitude);
-    public event UpdateGyroDataQuat OnGyroUpdate;
-
     public delegate void UpdateGyroDataAngle(float angleDegree);
     public event UpdateGyroDataAngle OnGyroUpdateZAngle;
 
@@ -36,21 +32,12 @@ public class GyroscopeManager : MonoBehaviour
         Input.gyro.enabled = true;
     }
 
+    Quaternion gyroQuat; // TEMP
+
     protected void Update()
     {
-        bool isLandScapeLeft = Screen.orientation == ScreenOrientation.LandscapeLeft;
-
-        Quaternion gyroQuat = new Quaternion(
-            Input.gyro.attitude.x * (isLandScapeLeft ? 1 : -1),
-            Input.gyro.attitude.y * (isLandScapeLeft ? 1 : -1),
-            Input.gyro.attitude.z * (isLandScapeLeft ? 1 : -1),
-            Input.gyro.attitude.w * (isLandScapeLeft ? 1 : -1)
-        );
-        if (OnGyroUpdate != null)
-            OnGyroUpdate(gyroQuat);
-
         if (OnGyroUpdateZAngle != null)
-            OnGyroUpdateZAngle(Input.gyro.attitude.eulerAngles.z);
+            OnGyroUpdateZAngle(Input.gyro.rotationRateUnbiased.z);
     }
 
     private void OnDestroy()
