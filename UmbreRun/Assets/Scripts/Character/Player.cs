@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : ADamageable
 {
+    [SerializeField]
+    Umbrella UmbrellaArm;
+
     [SerializeField]
     GameObject Arm;
 

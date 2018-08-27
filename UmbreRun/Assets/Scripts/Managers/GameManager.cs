@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
 
     private float m_timeBeforeNextSpeedIncrease = 0.0f;
 
+    [SerializeField]
+    private bool m_isGuilleminot = false;
+
     private void Awake()
     {
         if (m_instance == null)
@@ -68,7 +71,16 @@ public class GameManager : MonoBehaviour
     {
         m_instance = null;
     }
-    
+
+    public void NotifyLose()
+    {
+        if (m_isGuilleminot)
+            return;
+
+        OnUpdate = UpdateGameOver;
+    }
+
+    #region Update functions
     private void UpdateRunning()
     {
         m_timeBeforeNextSpeedIncrease -= Time.fixedDeltaTime;
@@ -79,4 +91,11 @@ public class GameManager : MonoBehaviour
             m_timeBeforeNextSpeedIncrease = m_timeBetweenSpeedIncrease;
         }
     }
+
+    private void UpdateGameOver()
+    {
+        ElementsSpeed = 0.0f;
+        // TODO: score, restart etc.
+    }
+    #endregion
 }

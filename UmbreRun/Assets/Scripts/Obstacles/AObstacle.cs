@@ -63,4 +63,16 @@ public abstract class AObstacle : MonoBehaviour
     {
         Speed = newSpeed;
     }
+
+    #region Collision
+    private void OnTriggerEnter2D(Collider2D otherCol)
+    {
+        if (otherCol.CompareTag("Player"))
+        {
+            ADamageable damageable = otherCol.GetComponent<ADamageable>();
+            if (damageable)
+                damageable.OnHitObstacle();
+        }
+    }
+    #endregion
 }
