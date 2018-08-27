@@ -25,10 +25,16 @@ public class PlayerController : MonoBehaviour
 
     protected void OnDestroy()
     {
-        TouchManager.Instance.OnMoveDown -= AskCrouch;
-        TouchManager.Instance.OnMoveUp -= AskJump;
+        if (TouchManager.Instance)
+        {
+            TouchManager.Instance.OnMoveDown -= AskCrouch;
+            TouchManager.Instance.OnMoveUp -= AskJump;
+        }
 
-        GyroscopeManager.Instance.OnGyroUpdateZAngle -= AskRotationUpdate;
+        if (GyroscopeManager.Instance)
+        {
+            GyroscopeManager.Instance.OnGyroUpdateZAngle -= AskRotationUpdate;
+        }
     }
     #endregion
 
