@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Player : ADamageable
 {
+    float playerY;
+
     [SerializeField]
     Umbrella UmbrellaArm;
 
@@ -21,7 +23,7 @@ public class Player : ADamageable
 
     bool IsJumping()
     {
-        return !Mathf.Approximately(transform.position.y, 0.0f);
+        return !Mathf.Approximately(transform.position.y, playerY);
     }
 
     public void Jump()
@@ -37,11 +39,11 @@ public class Player : ADamageable
         
         while ((currTime += Time.deltaTime) < endTime)
         {
-            transform.position = new Vector3(transform.position.x, m_jumpCurve.Evaluate(currTime), transform.position.z);
+            transform.position = new Vector3(transform.position.x, m_jumpCurve.Evaluate(currTime) + playerY, transform.position.z);
             yield return null;
         }
 
-        transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, playerY, transform.position.z);
     }
 
     public void Crouch()
@@ -77,6 +79,7 @@ public class Player : ADamageable
 
     private void Start()
     {
+        playerY = transform.position.y;
         GameManager.Instance.RegisterPlayer(this);
     }
 }
