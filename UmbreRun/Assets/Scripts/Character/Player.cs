@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    GameObject Umbrella;
+    GameObject Arm;
 
     [SerializeField]
     float m_rotationSpeed = 2.0f;
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
 	{
         m_currTimeRot += Time.deltaTime * m_rotationSpeed;
 
-        Umbrella.transform.rotation = Quaternion.Slerp(Umbrella.transform.rotation,　m_targetRot, m_currTimeRot);
+        Arm.transform.rotation = Quaternion.Slerp(Arm.transform.rotation,　m_targetRot, m_currTimeRot);
 	}
 
     private void Update()
