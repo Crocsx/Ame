@@ -25,11 +25,20 @@ public class EnvironmentManager : MonoBehaviour
         }
     }
 
-    private List<Rain> m_listRains = new List<Rain>();
-
+    #region Serialized Fields
     [SerializeField]
     private float m_rotationSpeed = 1.0f;
+    [SerializeField]
+    private float m_minTimeBeforeNextWeatherChange = 10.0f;
+    [SerializeField]
+    private float m_maxTimeBeforeNextWeatherChange = 20.0f;
+    [SerializeField]
+    private Vector2 m_minMaxAnglesRain = new Vector2(-65.0f, 65.0f);
+    #endregion
 
+    private List<Rain> m_listRains = new List<Rain>();
+
+    private float m_timeBeforeNextWeatherChange = 0.0f;
     private float m_currRotationRatio = 0.0f;
     private float m_gameSpeed = 0.0f;
 
@@ -57,10 +66,14 @@ public class EnvironmentManager : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ChangeRainDirection(Random.Range(-60.0f, 60.0f));
+            ChangeRainDirection(Random.Range(m_minMaxAnglesRain.x, m_minMaxAnglesRain.y));
         }
+        else
+#endif
+        UpdateWeather();
 
         if (m_currRotationRatio < 1.0f)
             UpdateRotation();
@@ -72,7 +85,17 @@ public class EnvironmentManager : MonoBehaviour
             GameManager.Instance.OnSpeedModified -= HandleSpeedModified;
     }
 
-    public void UpdateRotation()
+    private void UpdateWeather()
+    {
+        m_timeBeforeNextWeatherChange -= Time.deltaTime * m_gameSpeed;
+        if (m_timeBeforeNextWeatherChange <= 0.0f)
+        {
+            ChangeRainDirection(Random.Range(m_minMaxAnglesRain.x, m_minMaxAnglesRain.y));
+            m_timeBeforeNextWeatherChange = Random.Range(m_minTimeBeforeNextWeatherChange, m_maxTimeBeforeNextWeatherChange);
+        }
+    }
+
+    private void UpdateRotation()
     {
         m_currRotationRatio += Time.deltaTime * m_rotationSpeed * m_gameSpeed;
 
@@ -110,5 +133,11 @@ public class EnvironmentManager : MonoBehaviour
     {
         Debug.DrawRay(new Vector3(0.0f, 0.0f, 0.0f), transform.rotation * Vector3.down, Color.blue, 2.0f);
         return transform.rotation * Vector3.down;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(new Vector3(0.0f, 0.0f, 0.0f), GetRainDirection() * 3.0f);
     }
 }

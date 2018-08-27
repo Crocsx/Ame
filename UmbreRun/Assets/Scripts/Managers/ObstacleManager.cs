@@ -15,12 +15,14 @@ public class ObstacleManager : MonoBehaviour
         }
     }
 
+    #region Serialized Fields
     [SerializeField]
     private float m_minDistanceBetweenObstacles = 10.0f;
     [SerializeField]
     private float m_maxDistanceBetweenObstacles = 20.0f;
     [SerializeField]
     private List<AObstacle> m_listObstacles = null;
+    #endregion
 
     private float m_timeBeforeNextObstacle = 0.0f;
     private float m_gameSpeed = 0.0f;
