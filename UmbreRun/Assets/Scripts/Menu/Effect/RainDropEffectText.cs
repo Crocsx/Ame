@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class test : MonoBehaviour
+public class RainDropEffectText : MonoBehaviour
 {
     public Outline[] AVAILABLE_OUTLINES;
 
     List<Outline> outlines;
-    float RIPPLE_DELAY = 0.3f;
-    float RIPPLE_SPEED = 0.1f;
-    float MAX_RIPPLE_DIST = 15f;
+    float RIPPLE_DELAY = 0.5f;
+    float RIPPLE_SPEED = 0.5f;
+    float MAX_RIPPLE_DIST = 35f;
     float MIN_RIPPLE_ALPHA = 0f;
     float MAX_RIPPLE_ALPHA = 0.4f;
 
