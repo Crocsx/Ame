@@ -67,13 +67,11 @@ public class InputManager : MonoBehaviour
 
         if (directionUp)
         {
-        Debug.Log("UPDATE OnMoveUp");
             if (OnMoveUp != null)
                 OnMoveUp();
         }
         else
         {
-        Debug.Log("UPDATE OnMoveDown");
             if (OnMoveDown != null)
                 OnMoveDown();
         }
