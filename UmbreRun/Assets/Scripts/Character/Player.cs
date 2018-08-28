@@ -5,6 +5,8 @@ public class Player : ADamageable
 {
     float playerY;
 
+    Animator m_animator;
+
     [SerializeField]
     Umbrella UmbrellaArm;
 
@@ -34,6 +36,8 @@ public class Player : ADamageable
 
     IEnumerator JumpCoroutine()
     {
+        m_animator.SetBool("IsJumping", true);
+
         float currTime = 0.0f;
         float endTime = m_jumpCurve.keys[m_jumpCurve.length - 1].time;
         
@@ -44,6 +48,8 @@ public class Player : ADamageable
         }
 
         transform.position = new Vector3(transform.position.x, playerY, transform.position.z);
+
+        m_animator.SetBool("IsJumping", false);
     }
 
     public void Crouch()
@@ -54,6 +60,8 @@ public class Player : ADamageable
 
     IEnumerator CrouchCoroutine()
     {
+        m_animator.SetBool("IsCrouching", true);
+
         m_isCrouching = true;
         float currTime = 0.0f;
 
@@ -63,6 +71,7 @@ public class Player : ADamageable
             yield return null;
         }
 
+        m_animator.SetBool("IsCrouching", false);
         m_isCrouching = false;
     }
 
@@ -79,6 +88,8 @@ public class Player : ADamageable
 
     private void Start()
     {
+        m_animator = GetComponent<Animator>();
+
         playerY = transform.position.y;
         GameManager.Instance.RegisterPlayer(this);
     }
