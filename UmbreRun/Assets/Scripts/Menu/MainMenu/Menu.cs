@@ -15,6 +15,7 @@ public class Menu : MonoBehaviour {
 
     private void Start()
     {
+        GameManager.Instance.SetNewState(GameManager.GameState.Menu);
         ShowPanel("Home");
     }
 

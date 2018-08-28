@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("GameManager.Awake() - instance already exists!");
             Destroy(gameObject);
         }
-
+        DontDestroyOnLoad(gameObject);
         ElementsSpeed = 5.0f;
         m_timeBeforeNextSpeedIncrease = m_timeBetweenSpeedIncrease;
     }
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
     private void UpdateMenu()
     {
         // TODO: menu
-        SetNewState(GameState.InGame);
+        //SetNewState(GameState.InGame);
     }
 
     private void UpdatePause()

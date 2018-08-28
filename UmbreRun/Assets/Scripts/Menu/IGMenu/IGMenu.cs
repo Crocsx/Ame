@@ -39,6 +39,20 @@ public class IGMenu : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
+    public void StartStage()
+    {
+        GameManager.Instance.SetNewState(GameManager.GameState.Init);
+    }
+
+    public void PauseStage()
+    {
+        GameManager.Instance.SetNewState(GameManager.GameState.Pause);
+    }
+
+    public void UnPause()
+    {
+        GameManager.Instance.SetNewState(GameManager.GameState.InGame);
+    }
 
     void Activate(GameObject panel)
     {

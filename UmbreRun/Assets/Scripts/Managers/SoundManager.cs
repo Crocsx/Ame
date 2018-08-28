@@ -25,6 +25,7 @@ public class SoundManager : MonoBehaviour {
             Debug.LogWarning("SoundManager.Awake() - instance already exists!");
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Unmute(float value)
