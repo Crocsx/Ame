@@ -33,6 +33,7 @@ public class WindManager : MonoBehaviour
     private Player m_player = null;
     private float m_gameSpeed = 0.0f;
     private float m_timeBeforeNextWind = 10.0f;
+    public AudioSource windSound = null;
 
     private void Start()
     {
@@ -88,7 +89,7 @@ public class WindManager : MonoBehaviour
             duration = duration,
             direction = EnvironmentManager.Instance.GetRainDirection()
         };
-
+        windSound.Play();
         m_player.ReceiveWind(m_currentWind);
     }
 

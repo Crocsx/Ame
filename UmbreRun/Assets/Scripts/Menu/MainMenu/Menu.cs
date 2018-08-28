@@ -33,6 +33,11 @@ public class Menu : MonoBehaviour {
         Invoke("StartGame", 0.5f);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     void StartGame()
     {
         SceneManager.LoadScene("SampleScene");
