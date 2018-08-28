@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GameOver:
                 ElementsSpeed = 0.0f;
+                IGMenu.Instance.ShowPanel("End");
                 OnUpdate = UpdateGameOver;
                 break;
             case GameState.None:
