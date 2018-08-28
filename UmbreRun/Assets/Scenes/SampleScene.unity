@@ -1388,7 +1388,7 @@ MonoBehaviour:
     scale: {x: 1, y: 1.45, z: 1}
   - sprite: {fileID: 21300000, guid: 6cdf3911d0519bc45899cec8ff348b9a, type: 3}
     pos: {x: 0, y: -3.3, z: 0}
-    scale: {x: 0.75, y: 0.75, z: 1}
+    scale: {x: 1, y: 1, z: 1}
   - sprite: {fileID: 21300000, guid: c715d9eecccc3f9468c53727a1a0b3e8, type: 3}
     pos: {x: 0, y: -3.35, z: 0}
     scale: {x: 0.75, y: 0.75, z: 1}
