@@ -585,10 +585,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1685830117489932, guid: f2334457b6d35b241a3f97d4ed3c9405, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2334457b6d35b241a3f97d4ed3c9405, type: 2}
   m_IsPrefabAsset: 0
@@ -752,7 +748,7 @@ Prefab:
     - target: {fileID: 114775604442768214, guid: 7e206676bd55e5d48b9fee9fd022554a,
         type: 2}
       propertyPath: m_isGuilleminot
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e206676bd55e5d48b9fee9fd022554a, type: 2}
@@ -837,11 +833,6 @@ Prefab:
     - target: {fileID: 4049061223869724, guid: 61d3bb12043e6e14987d8f03368f54db, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114653939055230624, guid: 61d3bb12043e6e14987d8f03368f54db,
-        type: 2}
-      propertyPath: m_rotationSpeed
-      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61d3bb12043e6e14987d8f03368f54db, type: 2}
