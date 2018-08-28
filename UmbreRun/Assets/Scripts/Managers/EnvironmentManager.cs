@@ -83,6 +83,8 @@ public class EnvironmentManager : MonoBehaviour
     {
         if (GameManager.Instance)
             GameManager.Instance.OnSpeedModified -= HandleSpeedModified;
+
+        m_instance = null;
     }
 
     private void UpdateWeather()
