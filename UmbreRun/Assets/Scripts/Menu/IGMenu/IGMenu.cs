@@ -15,7 +15,7 @@ public class IGMenu : MonoBehaviour
 
     void Start()
     {
-        ShowPanel("Start");
+        ShowPanel("UI");
     }
 
     public void ShowPanel(string name)
@@ -41,7 +41,7 @@ public class IGMenu : MonoBehaviour
 
     public void StartStage()
     {
-        GameManager.Instance.SetNewState(GameManager.GameState.Init);
+        GameManager.Instance.SetNewState(GameManager.GameState.InGame);
     }
 
     public void PauseStage()
