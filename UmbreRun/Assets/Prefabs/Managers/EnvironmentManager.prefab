@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd75aaff054cf2489f15d7399eff5e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_rotationSpeed: 0.05
+  m_rotationSpeed: 0.01
   m_minTimeBeforeNextWeatherChange: 10
   m_maxTimeBeforeNextWeatherChange: 20
   m_minMaxAnglesRain: {x: -45, y: 45}
