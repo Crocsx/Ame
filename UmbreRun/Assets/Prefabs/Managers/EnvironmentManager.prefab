@@ -52,3 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rotationSpeed: 0.05
+  m_minTimeBeforeNextWeatherChange: 10
+  m_maxTimeBeforeNextWeatherChange: 20
+  m_minMaxAnglesRain: {x: -45, y: 45}

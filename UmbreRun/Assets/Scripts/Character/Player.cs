@@ -20,9 +20,46 @@ public class Player : ADamageable
     AnimationCurve m_jumpCurve;
 
     [SerializeField]
-    float m_crouchTime = 1.0f;
+    AnimationCurve m_crouchCurve;
+
     bool m_isCrouching = false;
 
+    private float m_gameSpeed = 0.0f;
+
+    private void Start()
+    {
+        m_animator = GetComponent<Animator>();
+
+        playerY = transform.position.y;
+        GameManager.Instance.RegisterPlayer(this);
+
+        m_gameSpeed = GameManager.Instance.ElementsSpeed;
+        GameManager.Instance.OnSpeedModified += HandleSpeedModifier;
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.Instance)
+            GameManager.Instance.OnSpeedModified -= HandleSpeedModifier;
+    }
+
+    private void HandleSpeedModifier(float newSpeed)
+    {
+        m_gameSpeed = newSpeed;
+    }
+
+    void Run()
+    {
+        AnimationClip jumpAnim = m_animator.runtimeAnimatorController.animationClips[1];
+
+        // TODO: Use GameSpeed
+
+        m_animator.speed = 1.0f;
+
+        transform.position = new Vector3(transform.position.x, playerY, transform.position.z);
+    }
+
+    #region Jump
     bool IsJumping()
     {
         return !Mathf.Approximately(transform.position.y, playerY);
@@ -40,18 +77,25 @@ public class Player : ADamageable
 
         float currTime = 0.0f;
         float endTime = m_jumpCurve.keys[m_jumpCurve.length - 1].time;
-        
+
+        AnimationClip jumpAnim = m_animator.runtimeAnimatorController.animationClips[1];
+
+        m_animator.speed = jumpAnim.length / endTime ;
+
+        //TODO: Use GameSpeed
+
         while ((currTime += Time.deltaTime) < endTime)
         {
             transform.position = new Vector3(transform.position.x, m_jumpCurve.Evaluate(currTime) + playerY, transform.position.z);
             yield return null;
         }
 
-        transform.position = new Vector3(transform.position.x, playerY, transform.position.z);
-
         m_animator.SetBool("IsJumping", false);
+        Run();
     }
+    #endregion
 
+    #region Crouch
     public void Crouch()
     {
         if(!m_isCrouching && !IsJumping())
@@ -63,17 +107,28 @@ public class Player : ADamageable
         m_animator.SetBool("IsCrouching", true);
 
         m_isCrouching = true;
+        
         float currTime = 0.0f;
+        float endTime = m_crouchCurve.keys[m_jumpCurve.length - 1].time;
 
-        while ((currTime += Time.deltaTime) < m_crouchTime)
+        AnimationClip crouchAnim1 = m_animator.runtimeAnimatorController.animationClips[2];
+        AnimationClip crouchAnim2 = m_animator.runtimeAnimatorController.animationClips[3];
+        m_animator.speed = (2 * crouchAnim1.length + crouchAnim2.length) / endTime;
+
+        //TODO: Use Game Speed
+
+        while ((currTime += Time.deltaTime) < endTime)
         {
-            //Animation + HitBox
+            transform.position = new Vector3(transform.position.x, m_crouchCurve.Evaluate(currTime) + playerY, transform.position.z);
             yield return null;
         }
 
         m_animator.SetBool("IsCrouching", false);
         m_isCrouching = false;
+
+        Run();
     }
+    #endregion
 
     public void UpdateRotate(float rotationZ)
 	{
@@ -84,13 +139,5 @@ public class Player : ADamageable
         // fast and ugly clamp
         if (Arm.transform.rotation.z < m_armRange.x || Arm.transform.rotation.z > m_armRange.y)
             Arm.transform.rotation = temp;
-    }
-
-    private void Start()
-    {
-        m_animator = GetComponent<Animator>();
-
-        playerY = transform.position.y;
-        GameManager.Instance.RegisterPlayer(this);
     }
 }
