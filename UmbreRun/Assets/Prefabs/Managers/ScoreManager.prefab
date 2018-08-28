@@ -51,3 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8caced5fb1cd34a479c71d958e1c722f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  save: {fileID: 11400000, guid: 79756e00593670942bcc8da41b494853, type: 2}
+  m_scoreMultiplierBase: 100

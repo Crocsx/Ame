@@ -2,6 +2,9 @@
 
 public class ScoreManager : MonoBehaviour
 {
+    [SerializeField]
+    HighScore save;
+
     private static ScoreManager m_instance = null;
     public static ScoreManager Instance
     {
@@ -66,5 +69,22 @@ public class ScoreManager : MonoBehaviour
     private void HandleSpeedModified(float newSpeed)
     {
         m_gameSpeed = newSpeed;
+    }
+
+    public void SaveScore()
+    {
+        for(int i = 0; i < save.scores.Length; i++)
+        {
+            if(m_score > save.scores[i])
+            {
+                for(int j = save.scores.Length - 1; j > i; j--)
+                {
+                    save.scores[j] = save.scores[j - 1];
+                }
+
+                save.scores[i] = m_score;
+                return;
+            }
+        }
     }
 }
