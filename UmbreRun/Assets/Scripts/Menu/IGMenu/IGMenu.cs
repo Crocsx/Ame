@@ -74,10 +74,22 @@ public class IGMenu : MonoBehaviour
         gameSound.Play();
     }
 
+    public void ReloadStage(string name)
+    {
+        DeactivateCurrent();
+        GameManager.Instance.SetNewState(GameManager.GameState.Menu);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public void PauseStage()
     {
         gameSound.pitch = 0.3f;
         GameManager.Instance.SetNewState(GameManager.GameState.Pause);
+    }
+
+    public void SetupEnd()
+    {
+        pEnd.GetComponent<EndScreen>().Setup();
     }
 
     public void UnPause()
