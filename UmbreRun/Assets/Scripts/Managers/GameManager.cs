@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
         None = 0,
         Init,
         Menu,
+        StartGame,
         InGame,
         Pause,
         GameOver,
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
-        ElementsSpeed = 5.0f;
+        ElementsSpeed = 0.0f;
         m_timeBeforeNextSpeedIncrease = m_timeBetweenSpeedIncrease;
     }
 
@@ -104,6 +105,10 @@ public class GameManager : MonoBehaviour
             case GameState.Menu:
                 OnUpdate = UpdateMenu;
                 break;
+            case GameState.StartGame:
+                ElementsSpeed = 5.0f;
+                OnUpdate = UpdateStartGame;
+                break;
             case GameState.InGame:
                 if (m_gameState == GameState.Pause)
                     ElementsSpeed = m_pausedSpeed;
@@ -111,11 +116,11 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Pause:
                 m_pausedSpeed = ElementsSpeed;
-                ElementsSpeed = 0;
+                ElementsSpeed = 0.0f;
                 OnUpdate = UpdatePause;
                 break;
             case GameState.GameOver:
-                ElementsSpeed = 0;
+                ElementsSpeed = 0.0f;
                 OnUpdate = UpdateGameOver;
                 break;
             case GameState.None:
@@ -140,20 +145,24 @@ public class GameManager : MonoBehaviour
     #region Update functions
     private void UpdateMenu()
     {
-        // TODO: menu
-        //SetNewState(GameState.InGame);
+        // Game Update while menu
+    }
+
+    private void UpdateStartGame()
+    {
+        SetNewState(GameState.InGame);
     }
 
     private void UpdatePause()
     {
-        // TODO: pause
+        // Pause Update while menu
     }
 
     private void UpdateRunning()
     {
         m_timeBeforeNextSpeedIncrease -= Time.fixedDeltaTime;
 
-        if (m_timeBeforeNextSpeedIncrease <= 0)
+        if (m_timeBeforeNextSpeedIncrease <= 0.0f)
         {
             ElementsSpeed += m_increaseStepValue;
             m_timeBeforeNextSpeedIncrease = m_timeBetweenSpeedIncrease;

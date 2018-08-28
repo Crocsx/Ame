@@ -38,7 +38,7 @@ public class EnvironmentManager : MonoBehaviour
 
     private List<Rain> m_listRains = new List<Rain>();
 
-    private float m_timeBeforeNextWeatherChange = 0.0f;
+    private float m_timeBeforeNextWeatherChange = 5.0f;
     private float m_currRotationRatio = 0.0f;
     private float m_gameSpeed = 0.0f;
 

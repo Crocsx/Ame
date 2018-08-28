@@ -15,7 +15,7 @@ public class IGMenu : MonoBehaviour
 
     void Start()
     {
-        ShowPanel("UI");
+        ShowPanel("Start");
     }
 
     public void ShowPanel(string name)
