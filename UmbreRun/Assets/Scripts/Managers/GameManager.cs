@@ -113,9 +113,19 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+#if UNITY_EDITOR
+    // DEBUG
+    Vector2 DEBUG_tangent1;
+    Vector2 DEBUG_tangent2;
+    Vector2 DEBUG_windDirection;
+    //
+#endif
     private void CheckForLoss()
     {
         Vector2 windDirection = EnvironmentManager.Instance.GetRainDirection().normalized;
+#if UNITY_EDITOR
+        DEBUG_windDirection = new Vector2(windDirection.x, windDirection.y);
+#endif
         CircleCollider2D playerCollider = m_player.Collider as CircleCollider2D;
         if (playerCollider == null)
         {
@@ -125,15 +135,30 @@ public class GameManager : MonoBehaviour
         Vector2 orthoVector = new Vector2(-windDirection.y, windDirection.x);
 
         Vector2 tangentPoint = colliderPos + playerCollider.offset + orthoVector * playerCollider.radius;
-        Debug.DrawRay(tangentPoint, -windDirection, Color.green, 2.0f);
-        RaycastHit2D hit = Physics2D.Raycast(tangentPoint, -windDirection, 1000f, ~LayerMask.NameToLayer("Umbrella"));
+#if UNITY_EDITOR
+        DEBUG_tangent1 = new Vector2(tangentPoint.x, tangentPoint.y);
+#endif
+        RaycastHit2D hit = Physics2D.Raycast(tangentPoint, -windDirection, 100f, ~LayerMask.NameToLayer("Umbrella"));
         if (hit.collider == null)
             NotifyLose();
 
         tangentPoint = colliderPos + playerCollider.offset - orthoVector * playerCollider.radius;
-        Debug.DrawRay(tangentPoint, -windDirection, Color.red, 2.0f);
-        hit = Physics2D.Raycast(tangentPoint, -windDirection, 1000f, ~LayerMask.NameToLayer("Umbrella"));
+#if UNITY_EDITOR
+        DEBUG_tangent2 = new Vector2(tangentPoint.x, tangentPoint.y);
+#endif
+        hit = Physics2D.Raycast(tangentPoint, -windDirection, 100f, ~LayerMask.NameToLayer("Umbrella"));
         if (hit.collider == null)
             NotifyLose();
     }
+
+#if UNITY_EDITOR
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(DEBUG_tangent1, DEBUG_tangent1 - DEBUG_windDirection * 5);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(DEBUG_tangent2, DEBUG_tangent2 - DEBUG_windDirection * 5);
+    }
+#endif
 }
