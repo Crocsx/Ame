@@ -21,6 +21,7 @@ public class IGMenu : MonoBehaviour
     public GameObject pUI;
     public GameObject pEnd;
 
+    public AudioSource gameSound;
     GameObject currentPanel;
 
     private void Awake()
@@ -36,6 +37,7 @@ public class IGMenu : MonoBehaviour
 
     void Start()
     {
+        gameSound.pitch = 0.3f;
         ShowPanel("Start");
     }
 
@@ -67,16 +69,20 @@ public class IGMenu : MonoBehaviour
 
     public void StartStage()
     {
+        gameSound.pitch = 1f;
         GameManager.Instance.SetNewState(GameManager.GameState.StartGame);
+        gameSound.Play();
     }
 
     public void PauseStage()
     {
+        gameSound.pitch = 0.3f;
         GameManager.Instance.SetNewState(GameManager.GameState.Pause);
     }
 
     public void UnPause()
     {
+        gameSound.pitch = 1f;
         GameManager.Instance.SetNewState(GameManager.GameState.InGame);
     }
 
