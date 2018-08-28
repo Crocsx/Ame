@@ -13,7 +13,9 @@ public class EndScreen : MonoBehaviour {
         {
             score[i].text = ScoreManager.Instance.Score.ToString();
         }
-	}
+
+        ScoreManager.Instance.SaveScore();
+    }
 	
 	// Update is called once per frame
 	void Update () {
