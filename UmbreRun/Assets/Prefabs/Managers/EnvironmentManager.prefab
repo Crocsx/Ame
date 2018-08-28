@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4049061223869724}
   - component: {fileID: 114653939055230624}
+  - component: {fileID: 114408115807759668}
   m_Layer: 2
   m_Name: EnvironmentManager
   m_TagString: GameController
@@ -40,6 +41,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114408115807759668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1365305319774384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 923de1cfbf24fdd47aeeb582c49753bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_forceOfWind: {x: 1, y: 5}
+  m_durationOfWind: {x: 1, y: 5}
+  m_timeLimitsBeforeNextWind: {x: 10, y: 20}
 --- !u!114 &114653939055230624
 MonoBehaviour:
   m_ObjectHideFlags: 1

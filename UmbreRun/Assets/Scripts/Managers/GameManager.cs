@@ -58,6 +58,10 @@ public class GameManager : MonoBehaviour
     private bool m_isGuilleminot = false;
 
     private Player m_player = null;
+    public Player Player
+    {
+        get { return m_player; }
+    }
 
     private void Awake()
     {
