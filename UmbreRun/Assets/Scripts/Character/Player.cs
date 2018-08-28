@@ -104,6 +104,7 @@ public class Player : ADamageable
     {
         m_animator.SetBool("IsCrouching", true);
 
+        Collider.enabled = false;
         m_isCrouching = true;
 
         float currTime = 0.0f;
@@ -124,6 +125,8 @@ public class Player : ADamageable
         m_animator.SetBool("IsCrouching", false);
         m_isCrouching = false;
 
+
+        Collider.enabled = true;
         Run();
     }
     #endregion
