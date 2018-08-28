@@ -21,6 +21,29 @@ public class Player : ADamageable
     float m_crouchTime = 1.0f;
     bool m_isCrouching = false;
 
+    private float m_gameSpeed = 0.0f;
+
+    private void Start()
+    {
+        playerY = transform.position.y;
+        GameManager.Instance.RegisterPlayer(this);
+
+        m_gameSpeed = GameManager.Instance.ElementsSpeed;
+        GameManager.Instance.OnSpeedModified += HandleSpeedModifier;
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.Instance)
+            GameManager.Instance.OnSpeedModified -= HandleSpeedModifier;
+    }
+
+    private void HandleSpeedModifier(float newSpeed)
+    {
+        m_gameSpeed = newSpeed;
+    }
+
+    #region Jump
     bool IsJumping()
     {
         return !Mathf.Approximately(transform.position.y, playerY);
@@ -37,7 +60,7 @@ public class Player : ADamageable
         float currTime = 0.0f;
         float endTime = m_jumpCurve.keys[m_jumpCurve.length - 1].time;
         
-        while ((currTime += Time.deltaTime) < endTime)
+        while ((currTime += Time.deltaTime * m_gameSpeed) < endTime)
         {
             transform.position = new Vector3(transform.position.x, m_jumpCurve.Evaluate(currTime) + playerY, transform.position.z);
             yield return null;
@@ -45,7 +68,9 @@ public class Player : ADamageable
 
         transform.position = new Vector3(transform.position.x, playerY, transform.position.z);
     }
+    #endregion
 
+    #region Crouch
     public void Crouch()
     {
         if(!m_isCrouching && !IsJumping())
@@ -57,14 +82,15 @@ public class Player : ADamageable
         m_isCrouching = true;
         float currTime = 0.0f;
 
-        while ((currTime += Time.deltaTime) < m_crouchTime)
+        while ((currTime += Time.deltaTime * m_gameSpeed) < m_crouchTime)
         {
-            //Animation + HitBox
+            // TODO: Animation + HitBox
             yield return null;
         }
 
         m_isCrouching = false;
     }
+    #endregion
 
     public void UpdateRotate(float rotationZ)
 	{
@@ -75,11 +101,5 @@ public class Player : ADamageable
         // fast and ugly clamp
         if (Arm.transform.rotation.z < m_armRange.x || Arm.transform.rotation.z > m_armRange.y)
             Arm.transform.rotation = temp;
-    }
-
-    private void Start()
-    {
-        playerY = transform.position.y;
-        GameManager.Instance.RegisterPlayer(this);
     }
 }
