@@ -9997,7 +9997,7 @@ Prefab:
     - target: {fileID: 114775604442768214, guid: 7e206676bd55e5d48b9fee9fd022554a,
         type: 2}
       propertyPath: m_isGuilleminot
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114775604442768214, guid: 7e206676bd55e5d48b9fee9fd022554a,
         type: 2}

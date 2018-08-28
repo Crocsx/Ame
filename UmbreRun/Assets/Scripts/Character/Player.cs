@@ -50,8 +50,6 @@ public class Player : ADamageable
 
     void Run()
     {
-        AnimationClip jumpAnim = m_animator.runtimeAnimatorController.animationClips[1];
-
         // TODO: Use GameSpeed
 
         m_animator.speed = 1.0f;
