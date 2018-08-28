@@ -5,6 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class IGMenu : MonoBehaviour
 {
+    private static IGMenu m_instance = null;
+    public static IGMenu Instance
+    {
+        get
+        {
+            if (m_instance)
+                return m_instance;
+            return null;
+        }
+    }
 
     public GameObject pStart;
     public GameObject pPause;
@@ -13,9 +23,25 @@ public class IGMenu : MonoBehaviour
 
     GameObject currentPanel;
 
+    private void Awake()
+    {
+        if (m_instance == null)
+            m_instance = this;
+        else if (m_instance != this)
+        {
+            Debug.LogWarning("IGMenu.Awake() - instance already exists!");
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
-        ShowPanel("UI");
+        ShowPanel("Start");
+    }
+
+    private void OnDestroy()
+    {
+        m_instance = null;
     }
 
     public void ShowPanel(string name)
@@ -41,7 +67,7 @@ public class IGMenu : MonoBehaviour
 
     public void StartStage()
     {
-        GameManager.Instance.SetNewState(GameManager.GameState.InGame);
+        GameManager.Instance.SetNewState(GameManager.GameState.StartGame);
     }
 
     public void PauseStage()
