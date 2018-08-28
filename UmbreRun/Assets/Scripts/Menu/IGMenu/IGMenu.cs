@@ -57,7 +57,7 @@ public class IGMenu : MonoBehaviour
             case "End":
                 panel = pEnd;
                 break;
-            case "IG":
+            case "UI":
                 panel = pUI;
                 break;
             case "Pause":
