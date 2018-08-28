@@ -38,8 +38,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4890490527694122}
-  - component: {fileID: 111802221957837778}
   - component: {fileID: 212236598731991574}
+  - component: {fileID: 95200073205008480}
   m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
@@ -204,20 +204,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!111 &111802221957837778
-Animation:
+--- !u!95 &95200073205008480
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1813936459005802}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 48ce630433100eb4fa9269c3ceab770b, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f617ed0f7cf037947832899da839a130, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114417047584149066
 MonoBehaviour:
   m_ObjectHideFlags: 1
