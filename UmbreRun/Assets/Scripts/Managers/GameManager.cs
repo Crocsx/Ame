@@ -19,6 +19,19 @@ public class GameManager : MonoBehaviour
     public delegate void TriggerSpeedModified(float newSpeed);
     public event TriggerSpeedModified OnSpeedModified;
 
+    public enum GameState : uint
+    {
+        None = 0,
+        Init,
+        Menu,
+        InGame,
+        Pause,
+        GameOver,
+
+        COUNT
+    }
+    public GameState m_gameState = GameState.Init;
+
     [SerializeField]
     private float m_elementsSpeed = 5.0f;
     public float ElementsSpeed
@@ -31,6 +44,7 @@ public class GameManager : MonoBehaviour
                 OnSpeedModified(m_elementsSpeed);
         }
     }
+    private float m_pausedSpeed = 0.0f;
 
     [SerializeField]
     private float m_timeBetweenSpeedIncrease = 1.0f;
@@ -60,9 +74,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // TODO: change
-        OnUpdate = UpdateRunning;
-	}
+        SetNewState(GameState.Menu);
+    }
 	
 	private void Update()
     {
@@ -84,15 +97,58 @@ public class GameManager : MonoBehaviour
         m_player = player;
     }
 
+    public void SetNewState(GameState newState)
+    {
+        switch (newState)
+        {
+            case GameState.Menu:
+                OnUpdate = UpdateMenu;
+                break;
+            case GameState.InGame:
+                if (m_gameState == GameState.Pause)
+                    ElementsSpeed = m_pausedSpeed;
+                OnUpdate = UpdateRunning;
+                break;
+            case GameState.Pause:
+                m_pausedSpeed = ElementsSpeed;
+                ElementsSpeed = 0;
+                OnUpdate = UpdatePause;
+                break;
+            case GameState.GameOver:
+                ElementsSpeed = 0;
+                OnUpdate = UpdateGameOver;
+                break;
+            case GameState.None:
+            case GameState.Init:
+            case GameState.COUNT:
+            default:
+                OnUpdate = () => { };
+                break;
+        }
+
+        m_gameState = newState;
+    }
+
     public void NotifyLose()
     {
         if (m_isGuilleminot)
             return;
 
-        OnUpdate = UpdateGameOver;
+        SetNewState(GameState.GameOver);
     }
 
     #region Update functions
+    private void UpdateMenu()
+    {
+        // TODO: menu
+        SetNewState(GameState.InGame);
+    }
+
+    private void UpdatePause()
+    {
+        // TODO: pause
+    }
+
     private void UpdateRunning()
     {
         m_timeBeforeNextSpeedIncrease -= Time.fixedDeltaTime;
@@ -108,7 +164,6 @@ public class GameManager : MonoBehaviour
 
     private void UpdateGameOver()
     {
-        ElementsSpeed = 0.0f;
         // TODO: score, restart etc.
     }
     #endregion
