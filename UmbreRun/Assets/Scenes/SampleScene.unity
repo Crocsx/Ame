@@ -1329,6 +1329,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114408115807759668, guid: 61d3bb12043e6e14987d8f03368f54db,
+        type: 2}
+      propertyPath: m_forceOfWind.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114408115807759668, guid: 61d3bb12043e6e14987d8f03368f54db,
+        type: 2}
+      propertyPath: m_forceOfWind.y
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61d3bb12043e6e14987d8f03368f54db, type: 2}
   m_IsPrefabAsset: 0
