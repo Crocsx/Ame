@@ -89,6 +89,7 @@ public class IGMenu : MonoBehaviour
 
     public void SetupEnd()
     {
+        GameManager.Instance.SetNewState(GameManager.GameState.Menu);
         pEnd.GetComponent<EndScreen>().Setup();
     }
 
