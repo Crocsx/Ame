@@ -7,18 +7,27 @@ public class EndScreen : MonoBehaviour {
 
     public Text[] score;
 
-	// Use this for initialization
-	public void Setup () {
+    public BestScore[] BestScore;
+
+    [SerializeField]
+    HighScore hScore;
+    // Use this for initialization
+    public void Setup () {
 		for(int i = 0; i < score.Length; i++)
         {
             score[i].text = ScoreManager.Instance.Score.ToString();
         }
 
         ScoreManager.Instance.SaveScore();
+
+        DisplayScore();
     }
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void DisplayScore() {
+        for (int i = 0; i < BestScore.Length; i++)
+        {
+            BestScore[i].SetScore(hScore.scores[i]);
+        }
+    }
 }
