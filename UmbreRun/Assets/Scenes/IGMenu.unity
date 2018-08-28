@@ -2586,10 +2586,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc79032b5c24f54da53c738e889b20e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pStart: {fileID: 0}
-  pPause: {fileID: 0}
-  pUI: {fileID: 0}
-  pEnd: {fileID: 0}
+  pStart: {fileID: 1246960007}
+  pPause: {fileID: 510145699}
+  pUI: {fileID: 1161594698}
+  pEnd: {fileID: 1093901992}
 --- !u!1 &1733205604
 GameObject:
   m_ObjectHideFlags: 0
