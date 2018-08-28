@@ -970,6 +970,12 @@ Prefab:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114480716940692918, guid: 89cead0658ad7584d987860d148796fc,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 296ebfd9b35eb7a499e11e565d8fca74,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89cead0658ad7584d987860d148796fc, type: 2}
   m_IsPrefabAsset: 0

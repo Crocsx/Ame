@@ -5880,6 +5880,128 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 296ebfd9b35eb7a499e11e565d8fca74,
         type: 3}
+    - target: {fileID: 1095908153579364, guid: f540b2428fde64c439b3943dfca3d50e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114301286261534168, guid: f540b2428fde64c439b3943dfca3d50e,
+        type: 2}
+      propertyPath: m_Text
+      value: '
+
+        Programing
+
+        Newton Guillaume
+
+        Rouffet Maxime
+
+
+        Artist :
+
+        Iparraguirre Theo
+
+        Katogi Kenta
+
+        Oguro Yuuki'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114770177043077542, guid: f540b2428fde64c439b3943dfca3d50e,
+        type: 2}
+      propertyPath: m_Text
+      value: '
+
+        Programing
+
+        Newton Guillaume
+
+        Rouffet Maxime
+
+
+        Artist :
+
+        Iparraguirre Theo
+
+        Katogi Kenta
+
+        Oguro Yuuki'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114423857075825078, guid: f540b2428fde64c439b3943dfca3d50e,
+        type: 2}
+      propertyPath: m_Text
+      value: '
+
+        Programing
+
+        Newton Guillaume
+
+        Rouffet Maxime
+
+
+        Artist :
+
+        Iparraguirre Theo
+
+        Katogi Kenta
+
+        Oguro Yuuki'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021782774102236, guid: f540b2428fde64c439b3943dfca3d50e,
+        type: 2}
+      propertyPath: m_Text
+      value: '
+
+        Game Design
+
+        Guilleux Nicolas
+
+
+        UI and Effect Engineer :
+
+        Giacomini Federico
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114092728126337696, guid: f540b2428fde64c439b3943dfca3d50e,
+        type: 2}
+      propertyPath: m_Text
+      value: '
+
+        Game Design
+
+        Guilleux Nicolas
+
+
+        UI and Effect Engineer :
+
+        Giacomini Federico
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114430490228960066, guid: f540b2428fde64c439b3943dfca3d50e,
+        type: 2}
+      propertyPath: m_Text
+      value: '
+
+        Game Design
+
+        Guilleux Nicolas
+
+
+        UI and Effect Engineer :
+
+        Giacomini Federico
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 224098942321896622, guid: f540b2428fde64c439b3943dfca3d50e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -39
+      objectReference: {fileID: 0}
+    - target: {fileID: 224059286747617176, guid: f540b2428fde64c439b3943dfca3d50e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 55
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f540b2428fde64c439b3943dfca3d50e, type: 2}
   m_IsPrefabAsset: 0
