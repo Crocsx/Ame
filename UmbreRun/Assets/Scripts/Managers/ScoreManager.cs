@@ -20,19 +20,19 @@ public class ScoreManager : MonoBehaviour
     public event TriggerScoreModified OnScoreChanged;
 
     [SerializeField]
-    private float m_scoreMultiplierBase = 100.0f;
+    private float m_scoreMultiplierBase = 0.4f;
 
     private float m_gameSpeed = 0.0f;
 
-    private int m_score = 0;
-    public int Score
+    private float m_score = 0;
+    public float Score
     {
         get { return m_score; }
         protected set
         {
             m_score = value;
             if (OnScoreChanged != null)
-                OnScoreChanged(value);
+                OnScoreChanged((int)value);
         }
     }
 
@@ -55,7 +55,8 @@ public class ScoreManager : MonoBehaviour
 	
 	private void Update()
     {
-        Score += Mathf.FloorToInt(Time.deltaTime * m_gameSpeed * m_scoreMultiplierBase);
+        Score += Time.deltaTime * m_gameSpeed * m_scoreMultiplierBase;
+        Debug.Log(Score);
 	}
 
     private void OnDestroy()
@@ -82,7 +83,7 @@ public class ScoreManager : MonoBehaviour
                     save.scores[j] = save.scores[j - 1];
                 }
 
-                save.scores[i] = m_score;
+                save.scores[i] = (int)m_score;
                 return;
             }
         }

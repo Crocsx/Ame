@@ -15,7 +15,7 @@ public class EndScreen : MonoBehaviour {
     public void Setup () {
 		for(int i = 0; i < score.Length; i++)
         {
-            score[i].text = ScoreManager.Instance.Score.ToString();
+            score[i].text = ((int)ScoreManager.Instance.Score).ToString();
         }
 
         ScoreManager.Instance.SaveScore();

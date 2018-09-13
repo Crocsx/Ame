@@ -52,4 +52,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   save: {fileID: 11400000, guid: 79756e00593670942bcc8da41b494853, type: 2}
-  m_scoreMultiplierBase: 100
+  m_scoreMultiplierBase: 0.4
